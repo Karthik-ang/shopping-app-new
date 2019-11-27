@@ -1,0 +1,37 @@
+<div class="row justify-content-start" style='margin-left: 17%;' *ngIf='!isMobile'><span>Sort By</span>
+    <div class="col-md-2" (click)="sort('LH')" style="cursor: pointer;">Price -- Low to High</div>
+    <div class="col-md-2" (click)="sort('HL')" style="cursor: pointer;">Price -- High to Low</div>
+    <div class="col-md-2" (click)="sort('D')" style="cursor: pointer;">Discount</div>
+</div>
+<div *ngIf='isMobile' style='padding:5%;' (click)='showPopup()'>
+    <i class="fa fa-sort " aria-hidden="true" style='color: black; float: right;'>Sort</i>
+</div>
+
+<!--Modal Popup-->
+<div class="modal" id="mySortModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Sort Options</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input type='radio' id='LtoH' value='LH' [(ngModel)]='selected'>Price -- Low to High<br>
+                <input type='radio' id='HtoL' value='HL' [(ngModel)]='selected'>Price -- High to Low<br>
+                <input type='radio' id='Discount' value='D' [(ngModel)]='selected'>Discount
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)='close()'>Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)='sort(selected)'>Apply</button>
+            </div>
+
+        </div>
+    </div>
+</div>

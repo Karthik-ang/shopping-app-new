@@ -1,0 +1,31 @@
+<div>
+    <header-comp [cartItems]='cartFacade.cartItems' [isMobile]='isMobile' [totalItems]='totalItems'
+        (filterChange)='searchFilter($event)'></header-comp>
+    <div class='row' *ngIf='isMobile'>
+        <div style='width:35%'>
+            <sort style='padding-top:10px' [shoppingItems]='shoppingItems' [isMobile]='isMobile'
+                (sortingChange)='sortingChange($event)'></sort>
+        </div>
+        <div style='width:35%'>
+            <filter [shoppingItems]='shoppingItems' (filterChange)='filterChange($event)' [isMobile]='isMobile'>
+            </filter>
+        </div>
+    </div>
+    <sort style='padding-top:10px' [shoppingItems]='shoppingItems' [isMobile]='isMobile'
+        (sortingChange)='sortingChange($event)' *ngIf='!isMobile'></sort>
+    <div class="row">
+        <div class='col-md-2' style='padding-top:10px;' *ngIf='!isMobile'>
+            <filter [shoppingItems]='shoppingItems' (filterChange)='filterChange($event)' [isMobile]='isMobile'>
+            </filter>
+        </div>
+        <div class='col-md-10'>
+            <shopping-list [cartItems]='cartFacade.cartItems' [isMobile]='isMobile' [shoppingItems]='shoppingItems'
+                (cartChange)='cartChange($event)'>
+            </shopping-list>
+        </div>
+    </div>
+    <footer style="padding-top: 3%; bottom: 0px; width: 100%;">
+        <p style="color: white; background-color: blue; text-align: center;">@copyright</p>
+    </footer>
+    <!-- <cart *ngIf='showCartPage' [cartItems]='cartItems' (cartChange)='cartChange($event)'></cart> -->
+</div>
