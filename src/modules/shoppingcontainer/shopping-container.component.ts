@@ -15,7 +15,7 @@ export class ShoppingContainerComponent implements OnInit {
     isMobile = false;
     totalItems = 0;
 
-    constructor(private http: HttpClient, private cartFacade: ShoppingCartFacade) { }
+    constructor(private http: HttpClient, public cartFacade: ShoppingCartFacade) { }
     ngOnInit() {
         if (window.screen.width <= 768) {
             this.isMobile = true;

@@ -3,7 +3,7 @@
     <div><input type="range" min="0" max="1000" value="50" class="slider" id="myRange"></div>
 </div> -->
 
-<div style='padding:10px;' *ngIf='!isMobile'> Filters
+<div style='padding:10px;' *ngIf='!isMobile'><p style="font-weight: bold;"> Filters</p>
     <ng5-slider [(value)]="value" [options]="options"></ng5-slider>
     <button class="btn btn-primary" style='margin-left: 40%; padding-top:10px'
         (click)='applyFilter(value)'>Apply</button>

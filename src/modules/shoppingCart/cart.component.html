@@ -5,24 +5,24 @@
                 <div class='col-md-2' style='padding-top:10px'>
                     <img width="100%" height="90%" src="{{item.img_url}}" />
                 </div>
-                <div class='col-md-2'>
+                <div class='col-md-4'>
                     <div calss='row' style='padding-top:30px'>
                         {{item.name}}
                     </div>
                     <div class="row">
-                        <div>
+                        <div [ngStyle]="{'width':isMobile?'18%':'25%'}">
                             <span>{{item.price}}</span>
                         </div>
-                        <div style='width: 15px;'>
-                            <span></span>
+                        <div style='text-decoration: line-through;' [ngStyle]="{'width':isMobile?'18%':'25%'}">
+                            <span>{{item.originalPrice}}</span>
                         </div>
                         <div>
-                            <span>{{item.discount}}%</span>
+                            <span style="color: green;">{{item.discount}}% off</span>
                         </div>
                     </div>
                 </div>
                 <div class='col-md-3' style='padding-top:30px'>
-                    <span><button (click)="changeCount('dec',item)"> – </button></span>
+                    <span><button (click)="changeCount('dec',item)"> ñ </button></span>
                     <span>
                         <input type="text" style='width: 40px; text-align: center;' [(ngModel)]='item.count'
                             (ngModelChange)='countChange($event,item)'></span>
