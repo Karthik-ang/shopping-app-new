@@ -34,8 +34,8 @@
     "npm":"`6.12.1"
   },
   "engines": {
-    "node":"`13.1.0",
-    "npm":"`6.12.1"
+    "node":"13.1.0",
+    "npm":"6.12.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.19",
