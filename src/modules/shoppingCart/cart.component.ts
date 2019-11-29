@@ -53,7 +53,6 @@ export class CartComponent implements OnInit {
             if (item.count == 0) {
                 this.removeCartItem(item);
             }
-
         } else {
             item.count = item.count + 1;
         }
@@ -63,8 +62,11 @@ export class CartComponent implements OnInit {
         this.cartFacade.findTotalItems();
     }
     countChange(event, item) {
-        if (event != '') {
+        if (event == '0') {
+            this.removeCartItem(item);
+        }else if(event != ''){
             item.count = parseInt(event);
+            this.cartFacade.storage.set('cartItems', JSON.stringify(this.cartFacade.cartItems));
             this.calculateTotal();
             this.calculateDiscount();
             this.cartFacade.findTotalItems();
@@ -74,6 +76,7 @@ export class CartComponent implements OnInit {
         const index = this.cartFacade.cartItems.findIndex(x => x.id == item.id);
         if (index != -1) {
             this.cartFacade.cartItems.splice(index, 1);
+            this.cartFacade.storage.set('cartItems', JSON.stringify(this.cartFacade.cartItems));
             if (this.cartFacade.cartItems.length) {
                 this.calculateTotal();
                 this.calculateDiscount();
