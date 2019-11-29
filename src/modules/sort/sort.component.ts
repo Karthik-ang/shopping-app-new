@@ -12,21 +12,25 @@ export class SortComponent implements OnInit {
     @Output() sortingChange = new EventEmitter();
     @Input() isMobile = false;
     selected = '';
-
+    sortValue='';
+    
     ngOnInit() {
     }
 
     sort(value) {
         if (value == 'LH') {
             // Low to High
+            this.sortValue = value;
             const sorted = this.shoppingItems.sort(function (a, b) { return a.price - b.price });
             this.sortingChange.emit(sorted);
         } else if (value == 'HL') {
             // High to Low
+            this.sortValue = value;
             const sorted = this.shoppingItems.sort(function (a, b) { return b.price - a.price });
             this.sortingChange.emit(sorted);
         } else {
             // Discount
+            this.sortValue = value;
             const sorted = this.shoppingItems.sort(function (a, b) { return a.discount - b.discount });
             this.sortingChange.emit(sorted);
         }
