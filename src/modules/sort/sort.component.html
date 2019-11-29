@@ -1,7 +1,11 @@
-<div class="row justify-content-start" style='margin-left: 17%;' *ngIf='!isMobile'><span><p style="font-weight: bold;">Sort By</p></span>
-    <div class="col-md-2" (click)="sort('LH')" style="cursor: pointer;">Price -- Low to High</div>
-    <div class="col-md-2" (click)="sort('HL')" style="cursor: pointer;">Price -- High to Low</div>
-    <div class="col-md-2" (click)="sort('D')" style="cursor: pointer;">Discount</div>
+<div class="row justify-content-start" style='margin-left: 19%;' *ngIf='!isMobile'>
+    <span>
+        <p style="font-weight: bold;">Sort By</p>
+    </span>
+    <div class="col-md-2 cursor-pointer" (click)="sort('LH')">
+        Price -- Low to High</div>
+    <div class="col-md-2 cursor-pointer" (click)="sort('HL')">Price -- High to Low</div>
+    <div class="col-md-2 cursor-pointer" (click)="sort('D')">Discount</div>
 </div>
 <div *ngIf='isMobile' style='padding:5%;' (click)='showPopup()'>
     <i class="fa fa-sort " aria-hidden="true" style='color: black; float: right;'>Sort</i>
