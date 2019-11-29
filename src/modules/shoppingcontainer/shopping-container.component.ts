@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ShoppingCartFacade } from '../shopping-cart.facade';
 import { Router } from '@angular/router';
+import { ShoppingService } from '../shopping.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class ShoppingContainerComponent implements OnInit {
     searchData = [];
     isCartPage = false;
 
-    constructor(private http: HttpClient, public cartFacade: ShoppingCartFacade, private router: Router) {
+    constructor(private http: HttpClient, public cartFacade: ShoppingCartFacade, private router: Router,
+        private shoppingService:ShoppingService) {
         this.searchData = this.router.getCurrentNavigation().extras.state ? this.router.getCurrentNavigation().extras.state.example : [];
     }
     ngOnInit() {
@@ -27,7 +29,7 @@ export class ShoppingContainerComponent implements OnInit {
         if (this.searchData.length) {
             this.shoppingItems = this.searchData;
         } else {
-            this.getShoppingItems().subscribe((response => {
+            this.shoppingService.getShoppingItems().subscribe((response => {
                 if (response) {
                     this.shoppingItems = response;
                     this.shoppingItems.forEach(element => {
@@ -39,12 +41,6 @@ export class ShoppingContainerComponent implements OnInit {
             }));
         }
         this.cartFacade.findTotalItems();
-    }
-    getShoppingItems() {
-        const url = 'https://api.myjson.com/bins/qzuzi';
-        var response: any;
-        response = this.http.get(url);
-        return response;
     }
     sortingChange(sortedItems) {
         this.shoppingItems = sortedItems;
@@ -59,4 +55,3 @@ export class ShoppingContainerComponent implements OnInit {
         this.cartFacade.addToCart(item);
     }
 }
-
