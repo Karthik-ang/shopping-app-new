@@ -1,7 +1,7 @@
-
-    <span style="cursor: pointer;">
-        <input type="text" [(ngModel)]='searchText'>
-    </span>
-    <span (click)="search()" style="cursor: pointer;">
-        <i class="fa fa-search" aria-hidden="true" style='color: white; float: right;'></i>
-    </span>
+<span class='cursor-pointer'>
+    <input type="text" placeholder="Search" [(ngModel)]='searchText'
+        class='search-box'>
+</span>
+<span (click)="search()" class='cursor-pointer color-white-float'>
+    <i class="fa fa-search" aria-hidden="true"></i>
+</span>
