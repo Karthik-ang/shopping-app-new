@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
     }
 
     ngOnInit() {
-        const items = JSON.parse(window.localStorage.getItem('cartItems'));
+        const items = JSON.parse(this.cartFacade.storage.get('cartItems'));
         this.cartFacade.cartItems = items ? items : [];
         if (!this.cartFacade.cartItems.length) {
             this.router.navigate(['']);
@@ -57,7 +57,7 @@ export class CartComponent implements OnInit {
         } else {
             item.count = item.count + 1;
         }
-        window.localStorage.setItem('cartItems', JSON.stringify(this.cartFacade.cartItems));
+        this.cartFacade.storage.set('cartItems', JSON.stringify(this.cartFacade.cartItems));
         this.calculateTotal();
         this.calculateDiscount();
         this.cartFacade.findTotalItems();
