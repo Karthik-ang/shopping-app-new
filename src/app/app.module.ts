@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FormsModule } from '@angular/forms';
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +33,8 @@ import { ShoppingCartFacade } from 'src/modules/shopping-cart.facade';
     AppRoutingModule,
     HttpClientModule,
     Ng5SliderModule,
-    FormsModule
+    FormsModule,
+    StorageServiceModule
   ],
   providers: [ShoppingCartFacade],
   bootstrap: [AppComponent]
