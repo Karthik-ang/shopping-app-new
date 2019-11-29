@@ -1,10 +1,10 @@
 
 <div class='simplepadding' *ngIf='!isMobile'>
     <p class='font-bold'> Filters</p>
-    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+    <ng5-slider [(value)]="cartFacade.value" [(highValue)]="cartFacade.highValue" [options]="options"></ng5-slider>
     <p class='text-center'>Price</p>
     <button class="btn btn-primary" class='margin-padding'
-        (click)='applyFilter(value, highValue)'>Apply</button>
+        (click)='applyFilter(cartFacade.value, cartFacade.highValue)'>Apply</button>
 </div>
 <div *ngIf='isMobile' class='padding-small' (click)='showPopup()' class='color-float'>
     <i class="fa fa-filter " aria-hidden="true">Filter</i>
@@ -22,7 +22,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+                <ng5-slider [(value)]="cartFacade.value" [(highValue)]="cartFacade.highValue" [options]="options"></ng5-slider>
                 <p class='text-center'>Price</p>
             </div>
 
@@ -30,7 +30,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" (click)='close()'>Cancel</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
-                    (click)='applyFilter(value, highValue)'>Apply</button>
+                    (click)='applyFilter(cartFacade.value, cartFacade.highValue)'>Apply</button>
             </div>
         </div>
     </div>
