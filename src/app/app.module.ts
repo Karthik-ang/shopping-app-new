@@ -15,6 +15,7 @@ import { FilterComponent } from 'src/modules/filter/filter.component';
 import { SearchComponent } from 'src/modules/search/search.component';
 import { HeaderComponent } from 'src/modules/header/header.component';
 import { ShoppingCartFacade } from 'src/modules/shopping-cart.facade';
+import { ShoppingService } from 'src/modules/shopping.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { ShoppingCartFacade } from 'src/modules/shopping-cart.facade';
     FormsModule,
     StorageServiceModule
   ],
-  providers: [ShoppingCartFacade],
+  providers: [ShoppingCartFacade, ShoppingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
