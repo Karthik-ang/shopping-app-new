@@ -1,9 +1,9 @@
 <div>
-    <header-comp [cartItems]='cartFacade.cartItems' [isMobile]='isMobile' [totalItems]='totalItems'
-        (filterChange)='searchFilter($event)'></header-comp>
+    <header-comp [cartItems]='cartFacade.cartItems' [isMobile]='isMobile' [totalItems]='cartFacade.totalItems'
+        (filterChange)='searchFilter($event)' [isCartPage]='isCartPage'></header-comp>
     <div class='row' *ngIf='isMobile'>
         <div style='width:35%'>
-            <sort style='padding-top:10px' [shoppingItems]='shoppingItems' [isMobile]='isMobile'
+            <sort class='padding-top' [shoppingItems]='shoppingItems' [isMobile]='isMobile'
                 (sortingChange)='sortingChange($event)'></sort>
         </div>
         <div style='width:35%'>
@@ -11,20 +11,20 @@
             </filter>
         </div>
     </div>
-    <sort style='padding-top:10px' [shoppingItems]='shoppingItems' [isMobile]='isMobile'
+    <sort class='padding-top' [shoppingItems]='shoppingItems' [isMobile]='isMobile'
         (sortingChange)='sortingChange($event)' *ngIf='!isMobile'></sort>
     <div class="row">
-        <div class='col-md-2' style='padding-top:10px;' *ngIf='!isMobile'>
+        <div class='col-sm-2 padding-top' *ngIf='!isMobile'>
             <filter [shoppingItems]='shoppingItems' (filterChange)='filterChange($event)' [isMobile]='isMobile'>
             </filter>
         </div>
-        <div class='col-md-10'>
+        <div class='col-sm-10'>
             <shopping-list [cartItems]='cartFacade.cartItems' [isMobile]='isMobile' [shoppingItems]='shoppingItems'
                 (cartChange)='cartChange($event)'>
             </shopping-list>
         </div>
     </div>
-    <footer style="padding-top: 3%; bottom: 0px; width: 100%;">
+    <footer class='footer-item width-full'>
         <p style="color: white; background-color: blue; text-align: center;">@copyright</p>
     </footer>
     <!-- <cart *ngIf='showCartPage' [cartItems]='cartItems' (cartChange)='cartChange($event)'></cart> -->
