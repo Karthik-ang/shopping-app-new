@@ -7,7 +7,10 @@ import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 export class ShoppingCartFacade {
     cartItems = [];
     totalItems = 0;
-
+    searchText = '';
+    value: number = 100;
+    highValue: number = 10000;
+    
     constructor(@Inject(SESSION_STORAGE) public storage: StorageService) {
         const items = JSON.parse(this.storage.get('cartItems'));
         this.cartItems = items ? items : [];
