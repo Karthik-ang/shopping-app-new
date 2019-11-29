@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ShoppingService } from '../shopping.service';
+import { ShoppingCartFacade } from '../shopping-cart.facade';
 
 @Component({
   selector: 'search-comp',
@@ -9,19 +9,18 @@ import { ShoppingService } from '../shopping.service';
 })
 export class SearchComponent implements OnInit {
   title = 'shopping-app';
-  searchText = '';
   displaySearch = false;
   @Input() shoppingItems = [];
   @Output() filterChange = new EventEmitter();
   @Input() isMobile = false;
   @Input() isCartPage = false;
-  constructor(private http: HttpClient, private router: Router, private shoppingService: ShoppingService) { }
+  constructor(private router: Router, private shoppingService: ShoppingService, public cartFacade: ShoppingCartFacade) { }
 
   ngOnInit() {
   }
 
   search() {
-    if (this.searchText != '') {
+    if (this.cartFacade.searchText != '') {
       this.shoppingService.getShoppingItems().subscribe((response => {
         if (response) {
           this.shoppingItems = response;
@@ -29,11 +28,13 @@ export class SearchComponent implements OnInit {
             element.discountValue = element.price * (element.discount / 100);
             element.originalPrice = element.price + element.discountValue;
           });
-          const items = this.shoppingItems.filter(item =>
-            item.name.toLowerCase().includes(this.searchText.toLowerCase()));
+          var items = this.shoppingItems.filter(item =>
+            item.name.toLowerCase().includes(this.cartFacade.searchText.toLowerCase()));
           if (!this.isCartPage) {
+            items = this.applyFilter(items);
             this.filterChange.emit(items);
           } else {
+            items = this.applyFilter(items);
             this.navigate(items);
           }
         }
@@ -47,19 +48,32 @@ export class SearchComponent implements OnInit {
             element.originalPrice = element.price + element.discountValue;
           });
           if (!this.isCartPage) {
+            this.shoppingItems = this.applyFilter(this.shoppingItems);
             this.filterChange.emit(this.shoppingItems);
           } else {
+            this.shoppingItems = this.applyFilter(this.shoppingItems);
             this.navigate(this.shoppingItems);
           }
         }
       }));
     }
   }
+  applyFilter(items) {
+    items.forEach(element => {
+      element.discountValue = element.price * (element.discount / 100)
+      element.originalPrice = element.price + element.discountValue;
+    });
+    var filterItems = items.filter(item => item.price >=
+      this.cartFacade.value && item.price <= this.cartFacade.highValue);
+    return filterItems;
+  }
+
   navigate(items) {
     if (this.isCartPage) {
       this.router.navigate([''], { state: { example: items } })
     }
   }
+
   showSearch(event) {
     this.displaySearch = !event;
   }
