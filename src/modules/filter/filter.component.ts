@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Options } from 'ng5-slider';
 
-import { HttpClient } from '@angular/common/http';
 import { ShoppingService } from '../shopping.service';
+import { ShoppingCartFacade } from '../shopping-cart.facade';
 
 declare var $: any;
 
@@ -12,8 +12,7 @@ declare var $: any;
 })
 export class FilterComponent implements OnInit {
     title = 'shopping-app';
-    value: number = 100;
-    highValue: number = 10000;
+    
     options: Options = {
         floor: 100,
         ceil: 10000
@@ -23,7 +22,7 @@ export class FilterComponent implements OnInit {
     @Output() filterChange = new EventEmitter();
     @Input() isMobile = false;
 
-    constructor(private http: HttpClient, private shoppingService: ShoppingService) { }
+    constructor(private shoppingService: ShoppingService, public cartFacade: ShoppingCartFacade) { }
 
     ngOnInit() {
 
@@ -36,7 +35,10 @@ export class FilterComponent implements OnInit {
                     element.discountValue = element.price * (element.discount / 100)
                     element.originalPrice = element.price + element.discountValue;
                 });
-                const items = this.shoppingItems.filter(item => item.price >= value && item.price <= highValue);
+                var items = this.shoppingItems.filter(item => item.price >= value && item.price <= highValue);
+                if (this.cartFacade.searchText != '') {
+                    items = this.search(items);
+                }
                 this.filterChange.emit(items);
             }
         }));
@@ -44,6 +46,17 @@ export class FilterComponent implements OnInit {
             this.close();
         }
     }
+    search(items) {
+        if (this.cartFacade.searchText != '') {
+            items.forEach(element => {
+                element.discountValue = element.price * (element.discount / 100);
+                element.originalPrice = element.price + element.discountValue;
+            });
+            const searchItems = items.filter(item => item.name.toLowerCase().includes(this.cartFacade.searchText.toLowerCase()));
+            return searchItems;
+        }
+    }
+
     showPopup() {
         $('#myFilterModal').show();
     }
@@ -51,4 +64,3 @@ export class FilterComponent implements OnInit {
         $('#myFilterModal').hide();
     }
 }
-
