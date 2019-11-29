@@ -1,6 +1,6 @@
 <div>
     <header-comp [cartItems]='cartFacade.cartItems' [isMobile]='isMobile' [totalItems]='cartFacade.totalItems'
-        (filterChange)='searchFilter($event)' [isCartPage]='isCartPage'></header-comp>
+        [isCartPage]='isCartPage'></header-comp>
     <div class='row' *ngIf='!isMobile'>
         <div Class="col-6">
             <div *ngFor='let item of cartFacade.cartItems' class='padding-margin'>
