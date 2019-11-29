@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { ShoppingCartFacade } from '../shopping-cart.facade';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,53 +14,37 @@ export class ShoppingContainerComponent implements OnInit {
     // cartItems = [];
     shoppingItems = [];
     isMobile = false;
-    totalItems = 0;
+    searchData = [];
+    isCartPage = false;
 
-    constructor(private http: HttpClient, public cartFacade: ShoppingCartFacade) { }
+    constructor(private http: HttpClient, public cartFacade: ShoppingCartFacade, private router: Router) {
+        this.searchData = this.router.getCurrentNavigation().extras.state ? this.router.getCurrentNavigation().extras.state.example : [];
+    }
     ngOnInit() {
         if (window.screen.width <= 768) {
             this.isMobile = true;
         }
-        this.getShoppingItems().subscribe((response => {
-            if (response) {
-                this.shoppingItems = response;
-                this.shoppingItems.forEach(element => {
-                    element.discountValue = element.price * (element.discount / 100)
-                    element.originalPrice = element.price + element.discountValue;
-                });
-                console.log(response);
-            }
-        }));
-        this.findTotalItems();
-        console.log(this.cartFacade.cartItems, 'cartItems')
+        if (this.searchData.length) {
+            this.shoppingItems = this.searchData;
+        } else {
+            this.getShoppingItems().subscribe((response => {
+                if (response) {
+                    this.shoppingItems = response;
+                    this.shoppingItems.forEach(element => {
+                        element.discountValue = element.price * (element.discount / 100)
+                        element.originalPrice = element.price + element.discountValue;
+                    });
+                    console.log(response);
+                }
+            }));
+        }
+        this.cartFacade.findTotalItems();
     }
     getShoppingItems() {
         const url = 'https://api.myjson.com/bins/qzuzi';
         var response: any;
         response = this.http.get(url);
         return response;
-    }
-    cartChange(item) {
-        this.totalItems = 0;
-        if (!this.cartFacade.cartItems.length) {
-            item.count = 1;
-            this.cartFacade.cartItems.push(item);
-        } else {
-            const index = this.cartFacade.cartItems.findIndex(x => x.id == item.id);
-            if (index != -1) {
-                this.cartFacade.cartItems[index].count = this.cartFacade.cartItems[index].count + 1;
-            } else {
-                item.count = 1;
-                this.cartFacade.cartItems.push(item);
-            }
-        }
-        this.findTotalItems();
-    }
-    findTotalItems() {
-        var self = this;
-        this.cartFacade.cartItems.forEach(el => {
-            self.totalItems = self.totalItems + el.count;
-        })
     }
     sortingChange(sortedItems) {
         this.shoppingItems = sortedItems;
@@ -69,6 +54,9 @@ export class ShoppingContainerComponent implements OnInit {
     }
     searchFilter(searchItems) {
         this.shoppingItems = searchItems;
+    }
+    cartChange(item) {
+        this.cartFacade.addToCart(item);
     }
 }
 
