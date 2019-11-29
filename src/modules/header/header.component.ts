@@ -11,19 +11,23 @@ export class HeaderComponent implements OnInit {
     @Input() totalItems = 0;
     @Input() shoppingItems = [];
     @Output() filterChange = new EventEmitter();
+    @Input() isCartPage = false;
+    showCart = true;
 
     constructor(private router: Router) { }
 
     ngOnInit() {
-
+        if (window.location.pathname == '/cart') {
+            this.showCart = false;
+        }
     }
     searchFilter(items) {
         this.filterChange.emit(items);
     }
-    
+
     navigate() {
         const data = this.cartItems;
-        this.router.navigate(['/cart'], { state: { example: data } });
+        this.router.navigate(['/cart']);
     }
 }
 
