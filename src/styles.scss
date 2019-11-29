@@ -1,0 +1,172 @@
+/* You can add global styles to this file, and also import other style files */
+@import './styles/variables';
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #4CAF50;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+  .simplepadding {
+    padding: $small-padding;
+  }
+  .font-bold{
+    font-weight: $font-weight-bold;
+  }
+  .text-center{
+    text-align: $text-align-center;
+  }
+  .margin-padding{
+    margin-left: $margin-left-medium; 
+    padding-top: $small-padding;
+    background-color: $blue-button-color;
+    color: $text-white;
+  }
+  .padding-small{
+    padding: $padding-small-percentage;
+  }
+  .color-float{
+    color: $color-black;
+    float: $float-right;
+  }
+  .color-white-float{
+    color: $text-white; 
+    float: $float-right;
+  }
+  .header{
+    background-color: $bg-color-blue; 
+    min-height: $min-height-header; 
+    padding-top: $small-padding;
+  }
+  .padding-bottom{
+    padding-bottom: $small-padding;
+  }
+  .padding-top{
+    padding-top: $small-padding;
+  }
+  .padding-top-high{
+    padding-top: $padding-high;
+  }
+  .padding-medium{
+    padding-top: $padding-small;
+  }
+  .padding{
+    padding: $padding;
+  }
+  .medium-height{
+    min-height: $medium-height;
+  }
+  .cursor-margin{
+    cursor: $cursor;
+    margin-left: $margin-left;
+    color: $text-white;
+    float: $float-right;
+  }
+  .position-relative{
+    color:$color-red; 
+    position: $position-relative; 
+    bottom: $bottom;
+  }
+  .cursor-pointer{
+    cursor: $cursor;
+  }
+  .search-box{
+    border-color: $text-white; 
+    color: $text-white; 
+    background-color: $bg-color-blue; 
+    border-width: $border-width;
+  }
+  .padding-margin{
+    padding: $small-padding; 
+    margin-left: $margin-left;
+  }
+  .border-min-height{
+    border: $border; 
+    min-height: $min-height; 
+  }
+  .width-full{
+    width:$full-width;
+  }
+  .line-through{
+    text-decoration: $line-through;;
+  }
+  .color-green{
+    color: $color-green;
+  }
+  .width-medium{
+    width: $width-medium;
+  }
+  .border-none{
+    border:$none-border;
+  }
+ .price-box{
+  border: $border; 
+  min-height: $height; 
+  width:$width; 
+  padding:$padding-small;
+}
+.price-box-mobile{
+  border: $border; 
+  min-height: $min-height-large; 
+  width:$mobile-width; 
+  padding:$padding-small;
+}
+.width{
+  border: $border; 
+  width:$width; 
+}
+.border-height{
+  border: $border; 
+  min-height: $min-height-large;
+}
+.padding-margin-price{
+  padding: $padding-small; 
+  margin-left: $padding-small;
+}
+.total-payable{
+  border: $border; 
+  width:$mobile-width;
+  padding: $padding-small; 
+  margin-left: $padding-small;
+}
+.footer-item{
+  padding-top: $padding-percent; 
+  bottom: $bottom; 
+}
+.min-height{
+  min-height: $half-height;
+}
+.padding-left{
+  padding-left: $padding-left;
+}
+.width-list{
+  width: $width-list
+}
+.add-button{
+  background-color: $color-gold !important; 
+  border-color: $color-black !important
+}
+  
