@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ShoppingService } from '../shopping.service';
 
 @Component({
   selector: 'search-comp',
@@ -14,14 +15,14 @@ export class SearchComponent implements OnInit {
   @Output() filterChange = new EventEmitter();
   @Input() isMobile = false;
   @Input() isCartPage = false;
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private shoppingService: ShoppingService) { }
 
   ngOnInit() {
   }
 
   search() {
     if (this.searchText != '') {
-      this.getShoppingItems().subscribe((response => {
+      this.shoppingService.getShoppingItems().subscribe((response => {
         if (response) {
           this.shoppingItems = response;
           this.shoppingItems.forEach(element => {
@@ -38,7 +39,7 @@ export class SearchComponent implements OnInit {
         }
       }));
     } else {
-      this.getShoppingItems().subscribe((response => {
+      this.shoppingService.getShoppingItems().subscribe((response => {
         if (response) {
           this.shoppingItems = response;
           this.shoppingItems.forEach(element => {
@@ -59,14 +60,7 @@ export class SearchComponent implements OnInit {
       this.router.navigate([''], { state: { example: items } })
     }
   }
-  getShoppingItems() {
-    const url = 'https://api.myjson.com/bins/qzuzi';
-    var response: any;
-    response = this.http.get(url);
-    return response;
-  }
   showSearch(event) {
     this.displaySearch = !event;
   }
 }
-
