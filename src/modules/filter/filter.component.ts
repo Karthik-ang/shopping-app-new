@@ -12,6 +12,7 @@ declare var $: any;
 export class FilterComponent implements OnInit {
     title = 'shopping-app';
     value: number = 100;
+    highValue: number = 10000;
     options: Options = {
         floor: 100,
         ceil: 10000
@@ -32,7 +33,7 @@ export class FilterComponent implements OnInit {
         response = this.http.get(url);
         return response;
     }
-    applyFilter(value) {
+    applyFilter(value, highValue) {
         this.getShoppingItems().subscribe((response => {
             if (response) {
                 this.shoppingItems = response;
@@ -40,7 +41,7 @@ export class FilterComponent implements OnInit {
                     element.discountValue = element.price * (element.discount / 100)
                     element.originalPrice = element.price + element.discountValue;
                 });
-                const items = this.shoppingItems.filter(item => item.price > value);
+                const items = this.shoppingItems.filter(item => item.price >= value && item.price <= highValue);
                 this.filterChange.emit(items);
             }
         }));
