@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Options } from 'ng5-slider';
 
 import { HttpClient } from '@angular/common/http';
+import { ShoppingService } from '../shopping.service';
 
 declare var $: any;
 
@@ -22,19 +23,13 @@ export class FilterComponent implements OnInit {
     @Output() filterChange = new EventEmitter();
     @Input() isMobile = false;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private shoppingService: ShoppingService) { }
 
     ngOnInit() {
 
     }
-    getShoppingItems() {
-        const url = 'https://api.myjson.com/bins/qzuzi';
-        var response: any;
-        response = this.http.get(url);
-        return response;
-    }
     applyFilter(value, highValue) {
-        this.getShoppingItems().subscribe((response => {
+        this.shoppingService.getShoppingItems().subscribe((response => {
             if (response) {
                 this.shoppingItems = response;
                 this.shoppingItems.forEach(element => {
