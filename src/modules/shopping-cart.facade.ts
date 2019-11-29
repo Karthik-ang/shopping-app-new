@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
 @Injectable({
     providedIn: 'root',
@@ -7,8 +8,8 @@ export class ShoppingCartFacade {
     cartItems = [];
     totalItems = 0;
 
-    constructor() {
-        const items = JSON.parse(window.localStorage.getItem('cartItems'));
+    constructor(@Inject(SESSION_STORAGE) public storage: StorageService) {
+        const items = JSON.parse(this.storage.get('cartItems'));
         this.cartItems = items ? items : [];
         this.findTotalItems();
     }
@@ -27,7 +28,7 @@ export class ShoppingCartFacade {
                 this.cartItems.push(item);
             }
         }
-        window.localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+        this.storage.set('cartItems', JSON.stringify(this.cartItems));
         this.findTotalItems();
     }
     findTotalItems() {
