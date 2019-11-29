@@ -1,8 +1,8 @@
-<div class='row' style='background-color: blue; min-height: 35px; padding-top: 10px;'>
-    <search-comp [isMobile]='isMobile' (filterChange)='searchFilter($event)'
-        [ngStyle]="{'margin-left':isMobile?'43%':'80%'}"></search-comp>
-    <span (click)='navigate()' style="cursor: pointer;margin-left: 2%; ">
-        <i class="fa fa-shopping-cart" aria-hidden="true" style='color: white;float: right;'></i>
+<div class='row header'>
+    <search-comp [isMobile]='isMobile' (filterChange)='searchFilter($event)' class='padding-bottom'
+        [ngStyle]="{'margin-left':isMobile?'40%':'80%'}" [isCartPage]='isCartPage'></search-comp>
+    <span (click)='navigate()' class='cursor-margin' *ngIf='showCart'>
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
     </span>
-    <span style='color:red; position: relative; bottom: 7px;'>{{totalItems}}</span>
+    <span class='position-relative' *ngIf='showCart'>{{totalItems}}</span>
 </div>
