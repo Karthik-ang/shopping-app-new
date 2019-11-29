@@ -1,78 +1,171 @@
-<div class='row'>
-    <div class='col-md-6'>
-        <div *ngFor='let item of data' style='padding: 10px; margin-left: 20px;'>
-            <div class='row' style="border: thin solid black; min-height: 125px; width:100%;">
-                <div class='col-md-2' style='padding-top:10px'>
-                    <img width="100%" height="90%" src="{{item.img_url}}" />
-                </div>
-                <div class='col-md-4'>
-                    <div calss='row' style='padding-top:30px'>
-                        {{item.name}}
+<div>
+    <header-comp [cartItems]='cartFacade.cartItems' [isMobile]='isMobile' [totalItems]='cartFacade.totalItems'
+        (filterChange)='searchFilter($event)' [isCartPage]='isCartPage'></header-comp>
+    <div class='row' *ngIf='!isMobile'>
+        <div Class="col-6">
+            <div *ngFor='let item of cartFacade.cartItems' class='padding-margin'>
+                <div class='row border-min-height width-full'>
+                    <div class='col-2 padding-top'>
+                        <img width="100%" height="90%" src="{{item.img_url}}" />
                     </div>
-                    <div class="row">
-                        <div [ngStyle]="{'width':isMobile?'18%':'25%'}">
-                            <span>{{item.price}}</span>
+                    <div class='col-10'>
+                        <div calss='row'>
+                            <p class='padding-top-high'>{{item.name}}</p>
                         </div>
-                        <div style='text-decoration: line-through;' [ngStyle]="{'width':isMobile?'18%':'25%'}">
-                            <span>{{item.originalPrice}}</span>
-                        </div>
-                        <div>
-                            <span style="color: green;">{{item.discount}}% off</span>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class='row'>
+                                    <div class='col-4'>
+                                        <span>&#x20b9;{{item.price}}</span>
+                                    </div>
+                                    <div class='col-3'>
+                                        <span>
+                                            <p class='line-through'>{{item.originalPrice}}</p>
+                                        </span>
+                                    </div>
+                                    <div class='col-5'>
+                                        <span class='color-green'>{{item.discount}}% off</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-4'>
+                                <span><button (click)="changeCount('dec',item)"> – </button></span>
+                                <span>
+                                    <input type="text" class='text-center width-medium' [(ngModel)]='item.count'
+                                        (ngModelChange)='countChange($event,item)'></span>
+                                <span><button (click)="changeCount('inc',item)"> + </button></span>
+                            </div>
+                            <div class='col-3'>
+                                <button class='border-none cursor-pointer'
+                                    (click)='removeCartItem(item)'>REMOVE</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class='col-md-3' style='padding-top:30px'>
-                    <span><button (click)="changeCount('dec',item)"> - </button></span>
-                    <span>
-                        <input type="text" style='width: 40px; text-align: center;' [(ngModel)]='item.count'
-                            (ngModelChange)='countChange($event,item)'></span>
-                    <span><button (click)="changeCount('inc',item)"> + </button></span>
+            </div>
+        </div>
+        <div class='col-1'>
+        </div>
+        <div Class='col-4 padding-margin'>
+            <div class='price-box'>
+                <p class='font-bold'>PRICE DETAILS</p>
+                <br>
+                <div class='row'>
+                    <div class='col-6'>
+                        Price ({{cartFacade.totalItems}} item)
+                    </div>
+                    <div class='col-3'>
+                        :
+                    </div>
+                    <div class='col-3'>
+                        {{totalPrice+totalDiscount}}
+                    </div>
                 </div>
-                <div class='col-md-3' style='padding-top:30px'>
-                    <button style='border: none; cursor: pointer;' (click)='removeCartItem(item)'>REMOVE</button>
+                <div class='row'>
+                    <div class='col-6'>
+                        Discount
+                    </div>
+                    <div class='col-3'>
+                        :
+                    </div>
+                    <div class='col-3'>
+                        {{totalDiscount}}
+                    </div>
+                </div>
+            </div>
+            <div class="width">
+                <div class='row medium-height'>
+                    <div class='col-9 padding font-bold'>Total
+                        Payable </div>
+                    <div class='col-3 padding font-bold'>
+                        {{totalPrice}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class='col-md-1'>
 
+    <div class='row' *ngIf='isMobile'>
+        <div class="col-12">
+            <div *ngFor='let item of cartFacade.cartItems' class='padding-margin'>
+                <div class='row border-height width-full'>
+                    <div class='col-3 padding-top'>
+                        <img width="100%" height="90%" src="{{item.img_url}}" />
+                    </div>
+                    <div class='col-9'>
+                        <div calss='row'>
+                            <p class='padding-top-high'>{{item.name}}</p>
+                        </div>
+                        <div class="row">
+                            <div class='col-4'>
+                                <span>&#x20b9;{{item.price}}</span>
+                            </div>
+                            <div class='col-4'>
+                                <span>
+                                    <p class='line-through'>{{item.originalPrice}}</p>
+                                </span>
+                            </div>
+                            <div class='col-4'>
+                                <span class='color-green'>{{item.discount}}% off</span>
+                            </div>
+                            <!-- </div>
+                        </div> -->
+                        </div>
+                        <div class='row'>
+                            <span><button (click)="changeCount('dec',item)"> – </button></span>
+                            <span>
+                                <input type="text" class='text-center width-medium' [(ngModel)]='item.count'
+                                    (ngModelChange)='countChange($event,item)'></span>
+                            <span><button (click)="changeCount('inc',item)"> + </button></span>
+                        </div>
+                        <div class='row'>
+                            <button class='border-none cursor-pointer' (click)='removeCartItem(item)'>REMOVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class='col-md-4' style='padding: 10px; margin-left: 20px;'>
-        <div style="border: thin solid black; min-height: 150px; width:92%; padding:15px;">
-            <p style='font-weight: bold;'>PRICE DETAILS</p>
+    <div class="row price-box-mobile padding-margin-price" *ngIf='isMobile'>
+        <!-- <div style="border: thin solid black; min-height: 150px; width:92%; padding:15px;"> -->
+        <div class="row width-full">
+            <p class='font-bold'>PRICE DETAILS</p>
             <br>
-            <div class='row' style='padding-top: 15px;'>
-                <div class='col-md-6' [ngStyle]="{'width':isMobile?'50%':'100%'}">
-                    Price
-                </div>
-                <div class='col-md-3' [ngStyle]="{'width':isMobile?'20%':'100%'}">
-                    :
-                </div>
-                <div class='col-md-3' [ngStyle]="{'width':isMobile?'30%':'100%'}">
-                    {{totalPrice+totalDiscount}}
-                </div>
+        </div>
+        <div class='row padding-medium width-full'>
+            <div class='col-6'>
+                Price ({{cartFacade.totalItems}} item)
             </div>
-            <div class='row' style='padding-top: 15px;'>
-                <div class='col-md-6' [ngStyle]="{'width':isMobile?'50%':'100%'}">
-                    Discount
-                </div>
-                <div class='col-md-3' [ngStyle]="{'width':isMobile?'20%':'100%'}">
-                    :
-                </div>
-                <div class='col-md-3' [ngStyle]="{'width':isMobile?'30%':'100%'}">
-                    {{totalDiscount}}
-                </div>
+            <div class='col-3 padding-medium width-full'>
+                :
+            </div>
+            <div class='col-3'>
+                {{totalPrice+totalDiscount}}
             </div>
         </div>
-        <div style="border: thin solid black; width:92%;">
-            <div class='row' style='padding:15px'>
-                <div class='col-md-9' [ngStyle]="{'width':isMobile?'70%':'100%'}" style='font-weight: bold;'>Total
-                    Payable </div>
-                <div class='col-md-3' [ngStyle]="{'width':isMobile?'20%':'100%'}" style='font-weight: bold;'>
-                    {{totalPrice}}
-                </div>
+        <div class='row padding-medium width-full'>
+            <div class='col-6'>
+                Discount
+            </div>
+            <div class='col-3'>
+                :
+            </div>
+            <div class='col-3'>
+                {{totalDiscount}}
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+    <div class='total-payable' *ngIf='isMobile'>
+        <div class='row padding-margin'>
+            <div class='col-10 font-bold'>Total
+                Payable </div>
+            <div class='col-2 font-bold'>
+                {{totalPrice}}
             </div>
         </div>
     </div>
+    <footer class='footer-item width-full'>
+        <p style="color: white; background-color: blue; text-align: center;">@copyright</p>
+    </footer>
 </div>
