@@ -67,7 +67,7 @@
     padding-top: $small-padding;
   }
   .padding-top-high{
-    padding-top: $padding-high;
+    padding-top: $padding;
   }
   .padding-medium{
     padding-top: $padding-small;
@@ -212,4 +212,7 @@
 }
 .width-medium-range{
   width: $width-range;
+}
+.padding-top-medium{
+  padding-top: $width-height;
 }
