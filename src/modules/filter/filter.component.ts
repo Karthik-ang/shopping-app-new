@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class FilterComponent implements OnInit {
     title = 'shopping-app';
-    
+
     options: Options = {
         floor: 100,
         ceil: 10000
@@ -32,8 +32,8 @@ export class FilterComponent implements OnInit {
             if (response) {
                 this.shoppingItems = response;
                 this.shoppingItems.forEach(element => {
-                    element.discountValue = element.price * (element.discount / 100)
-                    element.originalPrice = element.price + element.discountValue;
+                    element.originalPrice = Math.round(((element.price / (100 - element.discount)) * 100));
+                    element.discountValue = element.originalPrice - element.price;
                 });
                 var items = this.shoppingItems.filter(item => item.price >= value && item.price <= highValue);
                 if (this.cartFacade.searchText != '') {
@@ -49,8 +49,8 @@ export class FilterComponent implements OnInit {
     search(items) {
         if (this.cartFacade.searchText != '') {
             items.forEach(element => {
-                element.discountValue = element.price * (element.discount / 100);
-                element.originalPrice = element.price + element.discountValue;
+                element.originalPrice = Math.round(((element.price / (100 - element.discount)) * 100));
+                element.discountValue = element.originalPrice - element.price;
             });
             const searchItems = items.filter(item => item.name.toLowerCase().includes(this.cartFacade.searchText.toLowerCase()));
             return searchItems;
