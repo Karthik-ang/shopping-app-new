@@ -25,8 +25,8 @@ export class SearchComponent implements OnInit {
         if (response) {
           this.shoppingItems = response;
           this.shoppingItems.forEach(element => {
-            element.discountValue = element.price * (element.discount / 100);
-            element.originalPrice = element.price + element.discountValue;
+            element.originalPrice = Math.round(((element.price / (100 - element.discount)) * 100));
+            element.discountValue = element.originalPrice - element.price;
           });
           var items = this.shoppingItems.filter(item =>
             item.name.toLowerCase().includes(this.cartFacade.searchText.toLowerCase()));
@@ -44,8 +44,8 @@ export class SearchComponent implements OnInit {
         if (response) {
           this.shoppingItems = response;
           this.shoppingItems.forEach(element => {
-            element.discountValue = element.price * (element.discount / 100)
-            element.originalPrice = element.price + element.discountValue;
+            element.originalPrice = Math.round(((element.price / (100 - element.discount)) * 100));
+            element.discountValue = element.originalPrice - element.price;
           });
           if (!this.isCartPage) {
             this.shoppingItems = this.applyFilter(this.shoppingItems);
@@ -60,8 +60,8 @@ export class SearchComponent implements OnInit {
   }
   applyFilter(items) {
     items.forEach(element => {
-      element.discountValue = element.price * (element.discount / 100)
-      element.originalPrice = element.price + element.discountValue;
+      element.originalPrice = Math.round(((element.price / (100 - element.discount)) * 100));
+      element.discountValue = element.originalPrice - element.price;
     });
     var filterItems = items.filter(item => item.price >=
       this.cartFacade.value && item.price <= this.cartFacade.highValue);
