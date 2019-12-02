@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
     @Output() filterChange = new EventEmitter();
     @Input() isCartPage = false;
     showCart = true;
+    margin: any;
 
     constructor(private router: Router) { }
 
@@ -20,6 +21,14 @@ export class HeaderComponent implements OnInit {
         if (window.location.pathname == '/cart') {
             this.showCart = false;
         }
+        if (this.isCartPage) {
+            this.margin = window.screen.width - 189 - 40;
+            this.margin = this.margin.toString() + 'px';
+        } else {
+            this.margin = window.screen.width - 189 - 55 - 40;
+            this.margin = this.margin.toString() + 'px';
+        }
+        document.getElementById('search-comp').style.marginLeft = this.margin;
     }
     searchFilter(items) {
         this.filterChange.emit(items);
