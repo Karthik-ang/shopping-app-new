@@ -31,8 +31,8 @@
                             <div class='col-4'>
                                 <span><button (click)="changeCount('dec',item)" class='minus-button'> – </button></span>
                                 <span>
-                                    <input type="text" class='text-center width-medium margin-left-right' [(ngModel)]='item.count'
-                                        (ngModelChange)='countChange($event,item)'></span>
+                                    <input type="text" class='text-center width-medium margin-left-right'
+                                        [(ngModel)]='item.count' (ngModelChange)='countChange($event,item)'></span>
                                 <span><button (click)="changeCount('inc',item)" class='minus-button'> + </button></span>
                             </div>
                             <div class='col-3'>
@@ -114,12 +114,13 @@
                         <div class='row'>
                             <span><button (click)="changeCount('dec',item)" class='minus-button'> – </button></span>
                             <span>
-                                <input type="text" class='text-center width-medium margin-left-right' [(ngModel)]='item.count'
-                                    (ngModelChange)='countChange($event,item)'></span>
+                                <input type="text" class='text-center width-medium margin-left-right'
+                                    [(ngModel)]='item.count' (ngModelChange)='countChange($event,item)'></span>
                             <span><button (click)="changeCount('inc',item)" class='minus-button'> + </button></span>
                         </div>
                         <div class='row'>
-                            <button class='border-none cursor-pointer font-bold bg-white' (click)='removeCartItem(item)'>REMOVE</button>
+                            <button class='border-none cursor-pointer font-bold bg-white'
+                                (click)='removeCartItem(item)'>REMOVE</button>
                         </div>
                     </div>
                 </div>
@@ -165,7 +166,9 @@
             </div>
         </div>
     </div>
-    <footer class='footer-item width-full'>
-        <p class='footer-style width-full text-center'>@copyright</p>
-    </footer>
+    <div class='row'>
+        <footer class='footer-item width-full'>
+            <p class='footer-style text-center'>@copyright</p>
+        </footer>
+    </div>
 </div>
