@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="row justify-content-start">
 				<div *ngFor='let item of shoppingItems' [ngClass]="{'col-3': !isMobile, 'col-6': isMobile}"
-					style="padding-top:10px;">
+					class='padding'>
 					<!-- class='col-3' [ngStyle]="{'width':isMobile?'50%':'100%'}" style="padding-top:10px;"> -->
 					<div class='min-height'>
 						<img width="100%" height="90%" src="{{item.img_url}}" />
@@ -25,9 +25,9 @@
 						</div>
 					</div>
 					<div class="row justify-content-start">
-						<div [ngClass]="{'col-3': !isMobile, 'col-6': isMobile}" class='padding-top'>
+						<div [ngClass]="{'col-3': !isMobile, 'col-6': isMobile}">
 							<!-- [ngStyle]="{'width':isMobile?'50%':'100%'}" -->
-							<button class="btn btn-primary add-button" (click)='addItem(item)'>ADD TO CART</button>
+							<button class="btn btn-primary add-button rounded-corner" (click)='addItem(item)'>ADD TO CART</button>
 						</div>
 					</div>
 				</div>
