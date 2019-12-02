@@ -1,8 +1,11 @@
 <div class='row header'>
-    <search-comp [isMobile]='isMobile' (filterChange)='searchFilter($event)' class='padding-bottom'
-        [ngStyle]="{'margin-left':isMobile?'33%':'80%'}" [isCartPage]='isCartPage'></search-comp>
+        <span class="fa fa-star favourite-icon"></span>
+    <search-comp id='search-comp' [isMobile]='isMobile' (filterChange)='searchFilter($event)' class='padding-bottom'
+        [isCartPage]='isCartPage'></search-comp>
     <span (click)='navigate()' class='cursor-margin' *ngIf='showCart'>
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
     </span>
-    <span class='position-relative' *ngIf='showCart'>{{totalItems}}</span>
+    <p class='cart-value' *ngIf='showCart'>
+        {{totalItems}}
+    </p>
 </div>
