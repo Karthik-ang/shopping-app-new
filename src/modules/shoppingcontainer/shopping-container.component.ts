@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
 import { ShoppingCartFacade } from '../shopping-cart.facade';
 import { Router } from '@angular/router';
 import { ShoppingService } from '../shopping.service';
@@ -18,8 +17,8 @@ export class ShoppingContainerComponent implements OnInit {
     searchData = [];
     isCartPage = false;
 
-    constructor(private http: HttpClient, public cartFacade: ShoppingCartFacade, private router: Router,
-        private shoppingService:ShoppingService) {
+    constructor(public cartFacade: ShoppingCartFacade, private router: Router,
+        private shoppingService: ShoppingService) {
         this.searchData = this.router.getCurrentNavigation().extras.state ? this.router.getCurrentNavigation().extras.state.example : [];
     }
     ngOnInit() {
@@ -33,8 +32,8 @@ export class ShoppingContainerComponent implements OnInit {
                 if (response) {
                     this.shoppingItems = response;
                     this.shoppingItems.forEach(element => {
-                        element.discountValue = element.price * (element.discount / 100)
-                        element.originalPrice = element.price + element.discountValue;
+                        element.originalPrice = Math.round(((element.price / (100 - element.discount)) * 100));
+                        element.discountValue = element.originalPrice - element.price;
                     });
                     console.log(response);
                 }
