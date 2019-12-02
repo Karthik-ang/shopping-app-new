@@ -41,7 +41,6 @@
   }
   .margin-padding{
     margin-left: $margin-left-medium; 
-    padding-top: $small-padding;
     background-color: $blue-button-color;
     color: $text-white;
   }
@@ -173,7 +172,8 @@
 }
 .add-button{
   background-color: $color-gold !important; 
-  border-color: $color-black !important
+  border-color: $color-black !important;
+  color: $color-black;
 }
 .footer-style{
   color: $text-white; 
@@ -196,7 +196,8 @@
   border-radius: $rounded-radius;
   width: $rounded-width;
   height: $rounded-height;
-  padding: $rounded-padding;
+  text-align: $text-align-center;
+  font-size: $font;
 }
 .padding{
   padding-top:$width-height;
