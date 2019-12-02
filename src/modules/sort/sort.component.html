@@ -2,10 +2,15 @@
     <span>
         <p style="font-weight: bold;">Sort By</p>
     </span>
-    <div class="col-md-2 cursor-pointer" (click)="sort('LH')">
+    <div class="col-md-2 cursor-pointer" (click)="sort('LH')"
+        [ngClass]="{'sort-options':sortValue=='LH','font-bold':sortValue=='LH'}">
         Price -- Low to High</div>
-    <div class="col-md-2 cursor-pointer" (click)="sort('HL')">Price -- High to Low</div>
-    <div class="col-md-2 cursor-pointer" (click)="sort('D')">Discount</div>
+    <div class="col-md-2 cursor-pointer" (click)="sort('HL')"
+        [ngClass]="{'sort-options':sortValue=='HL','font-bold':sortValue=='HL'}">
+        Price -- High to Low</div>
+    <div class="col-md-2 cursor-pointer" (click)="sort('D')"
+        [ngClass]="{'sort-options':sortValue=='D','font-bold':sortValue=='D'}">
+        Discount</div>
 </div>
 <div *ngIf='isMobile' style='padding:5%;' (click)='showPopup()'>
     <i class="fa fa-sort " aria-hidden="true" style='color: black; float: right;'>Sort</i>
