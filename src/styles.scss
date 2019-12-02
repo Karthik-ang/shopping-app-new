@@ -5,7 +5,7 @@
     -webkit-appearance: $none-border;
     width: $full-width;
     height: $padding-small;
-    border-radius: 5px;  
+    border-radius: $border-radius;  
     background: $background;
     outline: $none-border;
     opacity: $opacity;
@@ -85,10 +85,16 @@
     color: $text-white;
     float: $float-right;
   }
-  .position-relative{
-    color:$color-red; 
-    position: $position-relative; 
-    bottom: $bottom;
+  .cart-value{
+    color:$text-white; 
+    right: $right-value;
+    background-color: $color-red;
+    border-radius: $radius;
+    height: $padding-small;
+    width: $padding-small;
+    position: $position-relative;
+    font-size: $small-padding;
+    padding-left: $border-radius;
   }
   .cursor-pointer{
     cursor: $cursor;
@@ -172,4 +178,34 @@
 .footer-style{
   color: $text-white; 
   background-color: $bg-color-blue;
+}
+.minus-button{
+  border-radius: $radius;
+  border-color: $color-black;
+  width: $padding-high;
+  height: $padding-high;
+}
+.margin-left-right{
+  margin-left: $border-radius;
+  margin-right: $border-radius;
+}
+.bg-white{
+  background-color: $text-white;
+}
+.rounded-corner{
+  border-radius: $rounded-radius;
+  width: $rounded-width;
+  height: $rounded-height;
+  padding: $rounded-padding;
+}
+.padding{
+  padding-top:$width-height;
+}
+.sort-options{
+  color: $bg-color-blue;
+  text-decoration: $text-underline;
+}
+.favourite-icon{
+  color: $color-yellow;
+  margin-left: $width-height;
 }
