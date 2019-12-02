@@ -29,14 +29,14 @@
                                 </div>
                             </div>
                             <div class='col-4'>
-                                <span><button (click)="changeCount('dec',item)"> – </button></span>
+                                <span><button (click)="changeCount('dec',item)" class='minus-button'> – </button></span>
                                 <span>
-                                    <input type="text" class='text-center width-medium' [(ngModel)]='item.count'
+                                    <input type="text" class='text-center width-medium margin-left-right' [(ngModel)]='item.count'
                                         (ngModelChange)='countChange($event,item)'></span>
-                                <span><button (click)="changeCount('inc',item)"> + </button></span>
+                                <span><button (click)="changeCount('inc',item)" class='minus-button'> + </button></span>
                             </div>
                             <div class='col-3'>
-                                <button class='border-none cursor-pointer'
+                                <button class='border-none cursor-pointer font-bold bg-white'
                                     (click)='removeCartItem(item)'>REMOVE</button>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                             <p class='padding-top-high'>{{item.name}}</p>
                         </div>
                         <div class="row">
-                            <div class='col-4'>
+                            <div class='col-3'>
                                 <span>&#x20b9;{{item.price}}</span>
                             </div>
                             <div class='col-4'>
@@ -105,21 +105,21 @@
                                     <p class='line-through'>{{item.originalPrice}}</p>
                                 </span>
                             </div>
-                            <div class='col-4'>
+                            <div class='col-5'>
                                 <span class='color-green'>{{item.discount}}% off</span>
                             </div>
                             <!-- </div>
                         </div> -->
                         </div>
                         <div class='row'>
-                            <span><button (click)="changeCount('dec',item)"> – </button></span>
+                            <span><button (click)="changeCount('dec',item)" class='minus-button'> – </button></span>
                             <span>
-                                <input type="text" class='text-center width-medium' [(ngModel)]='item.count'
+                                <input type="text" class='text-center width-medium margin-left-right' [(ngModel)]='item.count'
                                     (ngModelChange)='countChange($event,item)'></span>
-                            <span><button (click)="changeCount('inc',item)"> + </button></span>
+                            <span><button (click)="changeCount('inc',item)" class='minus-button'> + </button></span>
                         </div>
                         <div class='row'>
-                            <button class='border-none cursor-pointer' (click)='removeCartItem(item)'>REMOVE</button>
+                            <button class='border-none cursor-pointer font-bold bg-white' (click)='removeCartItem(item)'>REMOVE</button>
                         </div>
                     </div>
                 </div>
